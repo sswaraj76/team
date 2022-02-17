@@ -19,6 +19,10 @@ class _AdminFormState extends State<AdminForm> {
   bool _showPass = true;
 
   void _savedForm() {
+    var isValid = _formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
     _formKey.currentState!.save();
   }
 
@@ -111,12 +115,25 @@ class _AdminFormState extends State<AdminForm> {
                       ),
                     ),
                   ),
+                  onFieldSubmitted: (_) => _savedForm(),
                   onSaved: (val) {
                     _editedUser = User(
                         id: null,
                         name: _editedUser.name,
                         mailId: _editedUser.mailId,
                         password: val!);
+                  },
+                  validator: (val) {
+                    if (val!.isEmpty) {
+                      return "Please enter a Password";
+                    }
+                    if (!val.contains("\$") ||
+                        !val.contains("*") ||
+                        !val.contains("!") ||
+                        !val.contains("&")) {
+                      return "Please add a special Character(\$,*,!,&)";
+                    }
+                    return null;
                   },
                 ),
               ),
