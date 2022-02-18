@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../Widgets/AuthButton.dart';
 import '../Models/user.dart';
+import '../Provider/group_provider.dart';
+import '../Screen/group_Screen.dart';
 
 class AdminForm extends StatefulWidget {
   const AdminForm({
@@ -24,6 +27,10 @@ class _AdminFormState extends State<AdminForm> {
       return;
     }
     _formKey.currentState!.save();
+    Provider.of<GroupProvider>(context, listen: false)
+        .addGroup(_groupId, _editedUser);
+
+    Navigator.of(context).pushNamed(GroupScreen.routName);
   }
 
   @override
@@ -127,12 +134,12 @@ class _AdminFormState extends State<AdminForm> {
                     if (val!.isEmpty) {
                       return "Please enter a Password";
                     }
-                    if (!val.contains("\$") ||
-                        !val.contains("*") ||
-                        !val.contains("!") ||
-                        !val.contains("&")) {
-                      return "Please add a special Character(\$,*,!,&)";
-                    }
+                    // if (!val.contains("\$") ||
+                    //     !val.contains("*") ||
+                    //     !val.contains("!") ||
+                    //     !val.contains("&")) {
+                    //   return "Please add a special Character(\$,*,!,&)";
+                    // }
                     return null;
                   },
                 ),
@@ -156,8 +163,10 @@ class _AdminFormState extends State<AdminForm> {
                   onSaved: (val) {
                     if (val!.isEmpty) {
                       _groupId = DateTime.now().toString();
+                      print(_groupId);
                     } else {
                       _groupId = val;
+                      print(val);
                     }
                   },
                 ),
