@@ -16,7 +16,7 @@ class MemberScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(id),
+        title: SelectableText(id),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
