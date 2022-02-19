@@ -5,7 +5,8 @@ import 'package:provider/provider.dart';
 import './Screen/entry_screen.dart';
 import './Screen/admin_signup_screen.dart';
 import './Screen/group_Screen.dart';
-import './Screen/member_screen.dart';
+import './Screen/selection_screen.dart';
+import 'Screen/log_in.dart';
 import './Provider/group_provider.dart';
 
 void main() {
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         routes: {
           AdminSignUpScreen.routName: (context) => const AdminSignUpScreen(),
           GroupScreen.routName: (context) => const GroupScreen(),
-          MemberScreen.routeName: (context) => const MemberScreen()
+          SelectionScreen.routeName: (context) => const SelectionScreen(),
+          LoginPage.routeName: (context) => const LoginPage()
         },
       ),
     );

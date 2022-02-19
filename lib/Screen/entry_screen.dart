@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './admin_signup_screen.dart';
-import './group_Screen.dart';
+import './log_in.dart';
 import '../Widgets/AuthButton.dart';
 import '../Widgets/bg_image.dart';
 
@@ -10,61 +10,58 @@ class EntryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Stack(children: [
-          const BgImage(
-            imageUrl:
-                'https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-          ),
-          SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.5,
-                  ),
-                  const Text(
-                    "Wellcome to our App. Here you can build your team Chat with your Team. Specially for project discussion.",
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600),
-                    textAlign: TextAlign.center,
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  AuthButton(
-                    name: "Sign Up",
-                    funtion: () {
-                      Navigator.of(context)
-                          .pushNamed(AdminSignUpScreen.routName);
-                    },
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  AuthButton(
-                    name: "Sign In",
-                    funtion: () {
-                      Navigator.of(context).pushNamed(GroupScreen.routName);
-                    },
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
+    return Scaffold(
+      body: Stack(children: [
+        const BgImage(
+          imageUrl:
+              'https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+        ),
+        SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                ),
+                const Text(
+                  "Wellcome to our App. Here you can build your team Chat with your Team. Specially for project discussion.",
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.center,
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                AuthButton(
+                  name: "Sign Up",
+                  funtion: () {
+                    Navigator.of(context).pushNamed(AdminSignUpScreen.routName);
+                  },
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                AuthButton(
+                  name: "Sign In",
+                  funtion: () {
+                    Navigator.of(context).pushNamed(LoginPage.routeName);
+                  },
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
             ),
-          )
-        ]),
-      ),
+          ),
+        )
+      ]),
     );
   }
 }

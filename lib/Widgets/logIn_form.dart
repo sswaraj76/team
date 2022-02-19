@@ -1,39 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:team/Constants/constants.dart';
 
 import '../Widgets/AuthButton.dart';
-import '../Models/user.dart';
-import '../Provider/group_provider.dart';
 import '../Widgets/text_field_container.dart';
-import '../Screen/group_Screen.dart';
-import '../Constants/constants.dart';
-import '../Screen/log_in.dart';
+import '../Screen/admin_signup_screen.dart';
 
-class AdminForm extends StatefulWidget {
-  const AdminForm({
-    Key? key,
-  }) : super(key: key);
+class LoginForm extends StatefulWidget {
+  const LoginForm({Key? key}) : super(key: key);
 
   @override
-  State<AdminForm> createState() => _AdminFormState();
+  _LoginFormState createState() => _LoginFormState();
 }
 
-class _AdminFormState extends State<AdminForm> {
+class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  var _editedUser = User(id: null, name: "", mailId: "", password: '');
-  var _groupId = "";
-  bool _showPass = true;
+  var _showPass = true;
 
   void _savedForm() {
-    var isValid = _formKey.currentState!.validate();
-    if (!isValid) {
+    var isvalid = _formKey.currentState!.validate();
+    if (isvalid) {
       return;
     }
-    _formKey.currentState!.save();
-    Provider.of<GroupProvider>(context, listen: false)
-        .addGroup(_groupId, _editedUser);
-
-    Navigator.of(context).pushNamed(GroupScreen.routName);
   }
 
   @override
@@ -41,7 +28,7 @@ class _AdminFormState extends State<AdminForm> {
     return Column(
       children: [
         const Text(
-          "Sign Up",
+          "Login",
           style: TextStyle(color: Colors.white, fontSize: 30),
         ),
         const SizedBox(
@@ -51,38 +38,6 @@ class _AdminFormState extends State<AdminForm> {
           key: _formKey,
           child: Column(
             children: [
-              TextFieldContainer(
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    icon: Icon(
-                      Icons.account_circle,
-                      color: Color(0xFF6A2C70),
-                    ),
-                    hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 199, 134, 206)),
-                    border: InputBorder.none,
-                    hintText: "Name",
-                  ),
-                  textInputAction: TextInputAction.next,
-                  onSaved: (val) {
-                    _editedUser = User(
-                        id: null,
-                        name: val!,
-                        mailId: _editedUser.mailId,
-                        password: _editedUser.password);
-                  },
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return "Please enter your name";
-                    }
-
-                    if (val.contains(RegExp(r'[0-9]'))) {
-                      return "Please add only alphabets";
-                    }
-                    return null;
-                  },
-                ),
-              ),
               const SizedBox(
                 height: 20,
               ),
@@ -99,13 +54,7 @@ class _AdminFormState extends State<AdminForm> {
                     hintText: "Email",
                   ),
                   textInputAction: TextInputAction.next,
-                  onSaved: (val) {
-                    _editedUser = User(
-                        id: null,
-                        name: _editedUser.name,
-                        mailId: val!,
-                        password: _editedUser.password);
-                  },
+                  onSaved: (val) {},
                   validator: (val) {
                     if (val!.isEmpty) {
                       return "Please enter a Password";
@@ -149,13 +98,7 @@ class _AdminFormState extends State<AdminForm> {
                     ),
                   ),
                   onFieldSubmitted: (_) => _savedForm(),
-                  onSaved: (val) {
-                    _editedUser = User(
-                        id: null,
-                        name: _editedUser.name,
-                        mailId: _editedUser.mailId,
-                        password: val!);
-                  },
+                  onSaved: (val) {},
                   validator: (val) {
                     if (val!.isEmpty) {
                       return "Please enter a Password";
@@ -174,51 +117,30 @@ class _AdminFormState extends State<AdminForm> {
               const SizedBox(
                 height: 20,
               ),
-              TextFieldContainer(
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    icon: Icon(
-                      Icons.password,
-                      color: Color(0xFF6A2C70),
-                    ),
-                    hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 199, 134, 206)),
-                    border: InputBorder.none,
-                    hintText: "PassKey(Optional)",
-                  ),
-                  onFieldSubmitted: (_) => _savedForm(),
-                  onSaved: (val) {
-                    if (val!.isEmpty) {
-                      _groupId = DateTime.now().toString();
-                    } else {
-                      _groupId = val;
-                    }
-                  },
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              )
             ],
           ),
         ),
         AuthButton(name: "Sign Up", funtion: _savedForm),
+        const SizedBox(
+          height: 20,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              "Already have Account?",
+              "Want to Register?",
               style: TextStyle(
                 color: Colors.white,
               ),
             ),
             TextButton(
               child: const Text(
-                "Log In",
+                "Sign Up",
                 style: TextStyle(color: btnColor, fontWeight: FontWeight.bold),
               ),
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed(LoginPage.routeName);
+                Navigator.of(context)
+                    .pushReplacementNamed(AdminSignUpScreen.routName);
               },
             ),
           ],

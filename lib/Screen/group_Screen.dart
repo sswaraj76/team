@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../Provider/group_provider.dart';
 import '../Widgets/tile_card.dart';
-import '../Screen/member_screen.dart';
+import '../Screen/selection_screen.dart';
 
 class GroupScreen extends StatelessWidget {
   static const routName = "/groupscreen";
@@ -21,8 +21,9 @@ class GroupScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: ListView.builder(
           itemBuilder: (context, index) => InkWell(
-            onTap: () =>
-                Navigator.of(context).pushNamed(MemberScreen.routeName),
+            onTap: () => Navigator.of(context).pushNamed(
+                SelectionScreen.routeName,
+                arguments: groupData.groups.keys.toList()[index]),
             child: TileCard(
               id: groupData.groups.keys.toList()[index],
               data: groupData.groups.values.toList()[index],
