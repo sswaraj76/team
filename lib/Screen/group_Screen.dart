@@ -16,6 +16,12 @@ class GroupScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
